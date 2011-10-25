@@ -38,8 +38,8 @@ class CmdStart(ClusterCompleter):
     tag = None
 
     def addopts(self, parser):
-        cfg = config.StarClusterConfig().load()
-        templates = cfg.get_cluster_names().keys()
+        #cfg = config.StarClusterConfig().load()
+        #templates = cfg.get_cluster_names().keys()
         parser.add_option("-x", "--no-create", dest="no_create",
                           action="store_true", default=False,
                           help="do not launch new EC2 instances when " + \
@@ -69,7 +69,7 @@ class CmdStart(ClusterCompleter):
                           "forces launching the master node as a spot "
                           "instance when a spot cluster is requested.")
         opt = parser.add_option("-c", "--cluster-template", action="store",
-                                dest="cluster_template", choices=templates,
+                                dest="cluster_template", 
                                 default=None,
                                 help="cluster template to use " + \
                                 "from the config file")
@@ -83,8 +83,8 @@ class CmdStart(ClusterCompleter):
                           help="requests spot instances instead of flat " + \
                           "rate instances. Uses SPOT_BID as max bid for " + \
                           "the request.")
-        if optcomplete:
-            opt.completer = optcomplete.ListCompleter(opt.choices)
+        #if optcomplete:
+            #opt.completer = optcomplete.ListCompleter(opt.choices)
         parser.add_option("-d", "--description", dest="cluster_description",
                           action="store", type="string",
                           default="Cluster requested at %s" % \
@@ -104,8 +104,8 @@ class CmdStart(ClusterCompleter):
                                 default=None,
                                 help="shell for cluster user " + \
                                 "(defaults to bash)")
-        if optcomplete:
-            opt.completer = optcomplete.ListCompleter(opt.choices)
+        #if optcomplete:
+            #opt.completer = optcomplete.ListCompleter(opt.choices)
         parser.add_option("-m", "--master-image-id", dest="master_image_id",
                           action="store", type="string", default=None,
                           help="AMI to use when launching master")
@@ -121,8 +121,8 @@ class CmdStart(ClusterCompleter):
                                 choices=static.INSTANCE_TYPES.keys(),
                                 default=None,
                                 help="instance type for the node instances")
-        if optcomplete:
-            opt.completer = optcomplete.ListCompleter(opt.choices)
+        #if optcomplete:
+            #opt.completer = optcomplete.ListCompleter(opt.choices)
         parser.add_option("-a", "--availability-zone",
                           dest="availability_zone", action="store",
                           type="string", default=None,
@@ -179,9 +179,9 @@ class CmdStart(ClusterCompleter):
                 log.info("Using default cluster template: %s" % template)
             scluster = self.cm.get_cluster_template(template, tag)
         scluster.update(self.specified_options_dict)
-        if not self.opts.refresh_interval:
-            interval = self.cfg.globals.get("refresh_interval")
-            scluster.refresh_interval = interval
+        #if not self.opts.refresh_interval:
+            #interval = self.cfg.globals.get("refresh_interval")
+            #scluster.refresh_interval = interval
         if self.opts.spot_bid is not None and not self.opts.no_create:
             msg = user_msgs.spotmsg % {'size': scluster.cluster_size,
                                        'tag': tag}
