@@ -6,7 +6,7 @@ import os
 import getpass
 import tempfile
 
-VERSION = "0.92"
+VERSION = "0.9999"
 PID = os.getpid()
 TMP_DIR = tempfile.gettempdir()
 if os.path.exists("/tmp"):
@@ -62,16 +62,19 @@ INSTANCE_TYPES = {
     'm2.2xlarge': ['x86_64'],
     'm2.4xlarge': ['x86_64'],
     'cc1.4xlarge': ['x86_64'],
+    'cc2.8xlarge': ['x86_64'],
     'cg1.4xlarge': ['x86_64'],
 }
 
 MICRO_INSTANCE_TYPES = ['t1.micro']
 
-CLUSTER_COMPUTE_TYPES = ['cc1.4xlarge']
+CLUSTER_COMPUTE_TYPES = ['cc1.4xlarge', 'cc2.8xlarge']
 
 CLUSTER_GPU_TYPES = ['cg1.4xlarge']
 
 CLUSTER_TYPES = CLUSTER_COMPUTE_TYPES + CLUSTER_GPU_TYPES
+
+CLUSTER_REGIONS = ['us-east-1']
 
 PROTOCOLS = ['tcp', 'udp', 'icmp']
 
@@ -93,6 +96,7 @@ GLOBAL_SETTINGS = {
     'enable_experimental': (bool, False, False, None, None),
     'refresh_interval': (int, False, 30, None, None),
     'web_browser': (str, False, None, None, None),
+    'include': (list, False, [], None, None),
 }
 
 AWS_SETTINGS = {
